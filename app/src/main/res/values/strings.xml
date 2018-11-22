@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">mBank</string>
+    <string name="on_wrong_input">თქვენს მიერ შევსებული ველები სიგრძეში უნდა იყოს სამ სიმბოლოზე მეტი და ოცზე ნაკლები</string>
+    <string name="profile">პროფილი</string>
+    <string name="cards">ბარათები</string>
+    <string name="history">გადახდების ისტორია</string>
+    <string name="actives">აქტივები</string>
+    <string name="profile_name">სახელი</string>
+    <string name="profile_lastname">გვარი</string>
+    <string name="profile_sex">სქესი</string>
+    <string name="profile_date">დაბადების თარიღი</string>
+    <string name="profile_category">კლიენტის კატეგორია</string>
+    
+    <string name="profile_phone">ტელეფონი</string>
+    <string name="profile_address">მისამართი</string>
+    <string name="profile_mail">ელფოსტა</string>
+</resources>
