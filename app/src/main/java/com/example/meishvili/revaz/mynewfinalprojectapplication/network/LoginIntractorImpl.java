@@ -11,7 +11,7 @@ import retrofit2.Response;
 public class LoginIntractorImpl implements LoginContract.LoginIntractor {
     @Override
     public void getLoginInformation(final OnFinishedListener onFinishedListener, String username, String password) {
-        Api api = RetrofitInstance.getRetrofitInstance().create(Api.class);
+        Api api = RetrofitInstance.getRetrofitInstance("").create(Api.class);
 
         api.getLogin(username,password).enqueue(new retrofit2.Callback<Login>() {
             @Override

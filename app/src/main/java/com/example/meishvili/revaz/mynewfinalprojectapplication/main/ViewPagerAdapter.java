@@ -35,10 +35,10 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             return ActivesFragment.newInstance(sessionId);
         }
         if(i == 2){
-            return HistoryFragment.newInstance();
+            return HistoryFragment.newInstance(sessionId);
         }
 
-        return CardFragment.newInstance();
+        return CardFragment.newInstance(sessionId);
     }
 
     @Override

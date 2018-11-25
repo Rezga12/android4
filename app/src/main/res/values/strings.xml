@@ -14,4 +14,15 @@
     <string name="profile_phone">ტელეფონი</string>
     <string name="profile_address">მისამართი</string>
     <string name="profile_mail">ელფოსტა</string>
+
+    <string name="asset_name_points">ბონუს ქულები</string>
+    <string name="asset_name_liabilities">ვალდებულებები</string>
+    <string name="asset_name_assets">აქტივები</string>
+    <string name="asset_name_amounts">ხელმისაწვდომი თანხა</string>
+    <string name="history_income_label">შემოსავალი</string>
+    <string name="history_outcome_label">გასავალი</string>
+    <string name="valid_thru">valid thru</string>
+    <string name="პასსწორდ_ფიელდ">პაროლი</string>
+    <string name="user_field">მომხმარებელი</string>
+    <string name="button_come_in">შესვლა</string>
 </resources>

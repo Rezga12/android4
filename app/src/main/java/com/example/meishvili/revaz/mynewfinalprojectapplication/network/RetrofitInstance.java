@@ -14,20 +14,42 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
 
-    private static Retrofit retrofit;
+    private static Retrofit.Builder retrofit;
     private static final String BASE_URL = "https://api.fintech.ge";
 
     /**
      * Create an instance of Retrofit object
      * */
-    public static Retrofit getRetrofitInstance() {
+    public static Retrofit getRetrofitInstance(final String sessionId) {
+
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
+
+                HttpUrl newUrl = request.url().newBuilder().addPathSegment(sessionId).build();
+                Request newRequest = request.newBuilder().addHeader("Content-Type","application/json")
+                        .url(newUrl)
+                        .build();
+
+                Response response = chain.proceed(newRequest);
+                Log.i("1Assert",newRequest.url().toString());
+
+                return  response;
+            }
+        }).build();
+
+
         if (retrofit == null) {
-            return retrofit = new retrofit2.Retrofit.Builder()
+
+            retrofit = new retrofit2.Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create());
+
+            return retrofit.client(client)
                     .build();
         }
-        return retrofit;
+        return retrofit.client(client).build();
     }
 
   /*  public static Retrofit getRetrofitInstance(final String sessionId){

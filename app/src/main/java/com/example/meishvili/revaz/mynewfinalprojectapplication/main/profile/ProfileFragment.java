@@ -19,6 +19,7 @@ import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,10 +73,10 @@ public class ProfileFragment extends Fragment {
         String sessionId = getArguments().getString("id");
 
 
-        Retrofit retrofit = RetrofitInstance.getRetrofitInstance();
+        Retrofit retrofit = RetrofitInstance.getRetrofitInstance(sessionId);
 
         Api api = retrofit.create(Api.class);
-        api.getClientInfo(sessionId).enqueue(new Callback<ClientInfo>() {
+        api.getClientInfo().enqueue(new Callback<ClientInfo>() {
             @Override
             public void onResponse(Call<ClientInfo> call, Response<ClientInfo> response) {
                 if(response.isSuccessful()){
@@ -85,9 +86,9 @@ public class ProfileFragment extends Fragment {
                     sexLabel.setText(info.getClient().getSex());
 
 
-                    //Date birthDate = new Date(info.getClient().getBirthDate());
-                    //SimpleDateFormat dtl = new SimpleDateFormat("dd.mm.yyy");
-                    dateLabel.setText(info.getClient().getBirthDate()/*dtl.format(birthDate)*/);
+                    Date birthDate = new Date(Long.parseLong(info.getClient().getBirthDate()));
+                    SimpleDateFormat dtl = new SimpleDateFormat("dd.mm.yyyy");
+                    dateLabel.setText(dtl.format(birthDate));
 
 
                     categoryLabel.setText(info.getClient().getClientCategory());

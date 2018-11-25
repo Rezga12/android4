@@ -15,15 +15,20 @@ import java.util.List;
 
 public class ActivesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private static final int HEADER_VIEW = 0;
+    private static final int INFO_VIEW = 1;
+
     private List<Object> data = new ArrayList<Object>();
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        //View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_recycle,viewGroup,false);
 
-
+        if(i == HEADER_VIEW){
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_header,viewGroup,false);
+            return new HeaderViewHolder(view);
+        }
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_asset,viewGroup,false);
 
@@ -36,10 +41,10 @@ public class ActivesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         Log.i("Assert","asdasdsad");
         if(data.get(i) instanceof String){
-
-        }else{
-            Pair<String,Double> pair = ((Pair<String, Double>) data.get(i));
-            ((AssetViewHolder)viewHolder).setData(pair.first,pair.second + "");
+            ((HeaderViewHolder)viewHolder).setTitle((String)data.get(i));
+        }else if(data.get(i) instanceof Pair){
+            Pair pair = ((Pair) data.get(i));
+            ((AssetViewHolder)viewHolder).setData(pair.first.toString(),pair.second.toString() + "");
         }
     }
 
@@ -54,4 +59,14 @@ public class ActivesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         notifyDataSetChanged();
 
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(data.get(position) instanceof String){
+            return HEADER_VIEW;
+        }
+
+        return INFO_VIEW;
+    }
+
 }

@@ -72,7 +72,7 @@ public class ActivesFragment extends Fragment {
 
         String sessionId = getArguments().getString("id");
         list = new ArrayList<>();
-        final Retrofit retrofit = RetrofitInstance.getRetrofitInstance();
+        final Retrofit retrofit = RetrofitInstance.getRetrofitInstance(sessionId);
 
         Api api = retrofit.create(Api.class);
 
@@ -83,29 +83,29 @@ public class ActivesFragment extends Fragment {
 
 
 
-                list.add("points");
+                list.add(getResources().getString(R.string.asset_name_points));
 
                 for(Point p : response.body().getPoints()){
                     //points.add();
                     list.add(new Pair<> (p.getProductName(),p.getAmount().doubleValue()));
                 }
 
-                list.add("assets");
+                list.add(getResources().getString(R.string.asset_name_assets));
                 for(Asset a : response.body().getAssets()){
                     list.add(new Pair<>(a.getProductName(),a.getAmountBase()));
                 }
 
-                list.add("liabilities");
+                list.add(getResources().getString(R.string.asset_name_liabilities));
                 for(Liability a : response.body().getLiabilities()){
                     list.add(new Pair<>(a.getProductName(),a.getAmountBase()));
                 }
 
-                list.add("amounts");
+                list.add(getResources().getString(R.string.asset_name_amounts));
                 for(AvailableAmount a : response.body().getAvailableAmounts()){
                     list.add(new Pair<>(a.getProductName(),a.getAmountBase()));
                 }
 
-                Log.i("Assert",list.size() + "");
+
                 adapter.setData(list);
             }
 

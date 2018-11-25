@@ -8,6 +8,10 @@ import android.util.Log;
 
 import com.example.meishvili.revaz.mynewfinalprojectapplication.R;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
@@ -28,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),this,sessionId);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        Date date = new Date();   // given date
+        Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
+        calendar.setTime(date);   // assigns calendar to given date
+        int hr = calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h format
+        if (hr >= 18 || hr < 6) {
+            viewPager.setBackgroundResource(R.drawable.ic_evening_bg);
+        }
 
 
     }
